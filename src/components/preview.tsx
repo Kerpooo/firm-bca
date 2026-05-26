@@ -125,7 +125,7 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
     <div className="flex-1">
       <h2 className="mb-4 text-[15px] font-bold text-[#333]">Vista previa</h2>
       <div className="overflow-x-auto rounded-xl bg-white  shadow-[0_2px_12px_rgba(0,0,0,0.08)]">
-        <div ref={signatureRef} className="inline-block bg-white p-1">
+        <div ref={signatureRef} className="inline-block bg-white p-3">
           <table
             cellPadding="0"
             cellSpacing="0"
@@ -137,7 +137,7 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                 {/* Logo */}
                 <td
                   style={{
-                    paddingRight: "6px",
+                    paddingRight: "8px",
                     verticalAlign: "middle",
                     paddingTop: "0",
                     paddingBottom: "0",
@@ -146,7 +146,7 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                   <img
                     src="/logo.png"
                     alt="Logo"
-                    width={160}
+                    width={220}
                     style={{
                       display: "block",
                       border: 0,
@@ -164,11 +164,11 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                 >
                   <div
                     style={{
-                      fontSize: "16px",
+                      fontSize: "18px",
                       fontWeight: 700,
                       color: "#000",
-                      margin: 0,
-                      lineHeight: 1.1,
+                      marginBottom: "4px",
+                      lineHeight: 1.2,
                     }}
                   >
                     {data.name}
@@ -176,11 +176,11 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
 
                   <div
                     style={{
-                      fontSize: "13px",
+                      fontSize: "14px",
                       fontWeight: 700,
                       color: SHIELD_BLACK,
-                      margin: "0 0 2px 0",
-                      lineHeight: 1.1,
+                      marginBottom: "6px",
+                      lineHeight: 1.2,
                     }}
                   >
                     {data.title}
@@ -189,10 +189,10 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                   {data.dept && (
                     <div
                       style={{
-                        fontSize: "12px",
+                        fontSize: "13px",
                         color: "#333",
-                        margin: "0 0 4px 0",
-                        lineHeight: 1.1,
+                        marginBottom: "6px",
+                        lineHeight: 1.2,
                       }}
                     >
                       {data.dept}
@@ -202,10 +202,10 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                   {data.phone && (
                     <div
                       style={{
-                        fontSize: "12px",
+                        fontSize: "13px",
                         color: "#333",
-                        margin: "0 0 2px 0",
-                        lineHeight: 1.1,
+                        marginBottom: "4px",
+                        lineHeight: 1.2,
                       }}
                     >
                       📞 {data.phone}
@@ -214,10 +214,10 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
 
                   <div
                     style={{
-                      fontSize: "12px",
+                      fontSize: "13px",
                       color: "#333",
-                      margin: "0 0 2px 0",
-                      lineHeight: 1.1,
+                      marginBottom: "4px",
+                      lineHeight: 1.2,
                     }}
                   >
                     📍 {data.address}
@@ -225,10 +225,10 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
 
                   <div
                     style={{
-                      fontSize: "12px",
+                      fontSize: "13px",
                       color: "#333",
-                      margin: "0 0 2px 0",
-                      lineHeight: 1.1,
+                      marginBottom: "4px",
+                      lineHeight: 1.2,
                     }}
                   >
                     🏙️ {data.city}
@@ -236,9 +236,9 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
 
                   <div
                     style={{
-                      fontSize: "12px",
-                      margin: "0 0 2px 0",
-                      lineHeight: 1.1,
+                      fontSize: "13px",
+                      marginBottom: "4px",
+                      lineHeight: 1.2,
                     }}
                   >
                     ✉️{" "}
@@ -255,8 +255,8 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
 
                   <div
                     style={{
-                      fontSize: "12px",
-                      lineHeight: 1.1,
+                      fontSize: "13px",
+                      lineHeight: 1.2,
                     }}
                   >
                     🌐{" "}
