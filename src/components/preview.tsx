@@ -1,112 +1,66 @@
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
+import { SHIELD_BLUE, SHIELD_BLACK } from "../constants/brand";
 import type { SignaturePreviewProps } from "../interfaces/main";
 import html2canvas from "html2canvas";
 
 export default function SignaturePreview({ data }: SignaturePreviewProps) {
   const signatureRef = useRef<HTMLDivElement>(null);
 
+  const isValid = useMemo(() => {
+    const required = [
+      "name",
+      "title",
+      "dept",
+      "email",
+      "address",
+      "city",
+      "web",
+    ] as const;
+
+    for (const key of required) {
+      const value = (data as any)[key];
+      if (!value || String(value).trim() === "") return false;
+    }
+
+    // basic email validation
+    const email = (data as any).email as string;
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRe.test(email)) return false;
+
+    return true;
+  }, [data]);
+
   const generateSignatureHTML = () => {
     return `
-<table cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,sans-serif;">
-  <tr>
-
-    <!-- Logo -->
-    <td style="padding-right:20px; vertical-align:middle;">
-      <img
-        src="https://www.barrancabermeja.gov.co/info/barrancabermeja_bco/media/galeria/thumbs/thgaleria_700X400_1507.webp"
-        width="180"
-        style="display:block; border:0;"
-      />
-    </td>
-
-
-
-    <!-- Información -->
-    <td style="padding-left:20px; vertical-align:top;">
-
-      <div
-        style="
-          font-size:18px;
-          font-weight:700;
-          color:#000;
-          margin-bottom:4px;
-        "
-      >
-        ${data.name}
-      </div>
-
-      <div
-        style="
-          font-size:14px;
-          font-weight:700;
-          color:#333;
-          margin-bottom:10px;
-        "
-      >
-        ${data.title}
-      </div>
-
-      ${
-        data.dept
-          ? `
-      <div
-        style="
-          font-size:13px;
-          color:#333;
-          margin-bottom:10px;
-        "
-      >
-        ${data.dept}
-      </div>
-      `
-          : ""
-      }
-
-      ${
-        data.phone
-          ? `
-      <div style="font-size:13px; color:#333; margin-bottom:4px;">
-        📞 ${data.phone}
-      </div>
-      `
-          : ""
-      }
-
-      <div style="font-size:13px; color:#333; margin-bottom:4px;">
-        📍 ${data.address}
-      </div>
-
-      <div style="font-size:13px; color:#333; margin-bottom:4px;">
-        🏙️ ${data.city}
-      </div>
-
-      <div style="font-size:13px; margin-bottom:4px;">
-        ✉️
-        <a
-          href="mailto:${data.email}"
-          style="color:#2c6f8f; text-decoration:none;"
-        >
-          ${data.email}
-        </a>
-      </div>
-
-      <div style="font-size:13px;">
-        🌐
-        <a
-          href="https://${data.web}"
-          style="color:#2c6f8f; text-decoration:none;"
-        >
-          ${data.web}
-        </a>
-      </div>
-
-    </td>
-  </tr>
-</table>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<div style="font-family: 'Montserrat', Arial, sans-serif; color: #000; line-height:1.1;">
+  <table cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td style="padding-right:6px; vertical-align:middle; padding-top:0; padding-bottom:0;">
+        <img src="https://www.barrancabermeja.gov.co/info/barrancabermeja_bco/media/galeria/thumbs/thgaleria_700X400_1507.webp" width="160" style="display:block; border:0; object-fit:contain;" />
+      </td>
+      <td style="padding-left:6px; vertical-align:top; padding-top:0; padding-bottom:0;">
+        <div style="font-size:16px; font-weight:700; margin:0;">${data.name}</div>
+        <div style="font-size:13px; font-weight:700; color:${SHIELD_BLACK}; margin:0 0 2px 0;">${data.title}</div>
+        ${data.dept ? `<div style="font-size:12px; color:#333; margin:0 0 4px 0;">${data.dept}</div>` : ""}
+        ${data.phone ? `<div style="font-size:12px; color:#333; margin:0 0 2px 0;">📞 ${data.phone}</div>` : ""}
+        <div style="font-size:12px; color:#333; margin:0 0 2px 0;">📍 ${data.address}</div>
+        <div style="font-size:12px; color:#333; margin:0 0 2px 0;">🏙️ ${data.city}</div>
+        <div style="font-size:12px; margin:0 0 2px 0;">✉️ <a href="mailto:${data.email}" style="color:${SHIELD_BLUE}; text-decoration:none;">${data.email}</a></div>
+        <div style="font-size:12px; margin:0;">🌐 <a href="https://${data.web}" style="color:${SHIELD_BLUE}; text-decoration:none;">${data.web}</a></div>
+      </td>
+    </tr>
+  </table>
+</div>
 `;
   };
 
   const copyHTMLSignature = async () => {
+    if (!isValid) {
+      alert("Completa los campos obligatorios antes de copiar la firma.");
+      return;
+    }
+
     try {
       const html = generateSignatureHTML();
 
@@ -125,21 +79,42 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
   };
 
   const downloadSignaturePNG = async () => {
+    if (!isValid) {
+      alert("Completa los campos obligatorios antes de descargar la firma.");
+      return;
+    }
+
     if (!signatureRef.current) return;
 
     try {
-      const canvas = await html2canvas(signatureRef.current, {
-        scale: 4,
-        useCORS: true,
-        backgroundColor: "#ffffff",
-      });
+      // Create a temporary clone with extra bottom padding so the PNG has white space below
+      const extraBottom = 20; // pixels of extra whitespace at bottom
+      let tempEl: HTMLElement | null = null;
 
-      const link = document.createElement("a");
+      try {
+        const original = signatureRef.current as HTMLElement;
+        tempEl = original.cloneNode(true) as HTMLElement;
+        tempEl.style.paddingBottom = `${extraBottom}px`;
+        tempEl.style.background = "#ffffff";
+        tempEl.style.position = "fixed";
+        tempEl.style.left = "-9999px";
+        tempEl.style.top = "0";
 
-      link.download = "firma.png";
-      link.href = canvas.toDataURL("image/png");
+        document.body.appendChild(tempEl);
 
-      link.click();
+        const canvas = await html2canvas(tempEl, {
+          scale: 4,
+          useCORS: true,
+          backgroundColor: "#ffffff",
+        });
+
+        const link = document.createElement("a");
+        link.download = "firma.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      } finally {
+        if (tempEl && tempEl.parentNode) tempEl.parentNode.removeChild(tempEl);
+      }
     } catch (error) {
       console.error(error);
       alert("Error al descargar");
@@ -149,31 +124,33 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
   return (
     <div className="flex-1">
       <h2 className="mb-4 text-[15px] font-bold text-[#333]">Vista previa</h2>
-
-      <div className="overflow-x-auto rounded-xl bg-white p-7 shadow-[0_2px_12px_rgba(0,0,0,0.08)]">
-        <div ref={signatureRef} className="inline-block bg-white p-4">
+      <div className="overflow-x-auto rounded-xl bg-white  shadow-[0_2px_12px_rgba(0,0,0,0.08)]">
+        <div ref={signatureRef} className="inline-block bg-white p-1">
           <table
             cellPadding="0"
             cellSpacing="0"
             border={0}
-            className='font-["Nunito","Segoe_UI",Arial,sans-serif]'
+            className='font-["Montserrat","Arial",sans-serif]'
           >
             <tbody>
               <tr>
                 {/* Logo */}
                 <td
                   style={{
-                    paddingRight: "20px",
+                    paddingRight: "6px",
                     verticalAlign: "middle",
+                    paddingTop: "0",
+                    paddingBottom: "0",
                   }}
                 >
                   <img
                     src="/logo.png"
                     alt="Logo"
-                    width={180}
+                    width={160}
                     style={{
                       display: "block",
                       border: 0,
+                      objectFit: "contain",
                     }}
                   />
                 </td>
@@ -181,16 +158,17 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                 {/* Contenido */}
                 <td
                   style={{
-                    paddingLeft: "20px",
+                    paddingLeft: "8px",
                     verticalAlign: "top",
                   }}
                 >
                   <div
                     style={{
-                      fontSize: "18px",
+                      fontSize: "16px",
                       fontWeight: 700,
                       color: "#000",
-                      marginBottom: "4px",
+                      margin: 0,
+                      lineHeight: 1.1,
                     }}
                   >
                     {data.name}
@@ -198,10 +176,11 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
 
                   <div
                     style={{
-                      fontSize: "14px",
+                      fontSize: "13px",
                       fontWeight: 700,
-                      color: "#333",
-                      marginBottom: "10px",
+                      color: SHIELD_BLACK,
+                      margin: "0 0 2px 0",
+                      lineHeight: 1.1,
                     }}
                   >
                     {data.title}
@@ -210,9 +189,10 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                   {data.dept && (
                     <div
                       style={{
-                        fontSize: "13px",
+                        fontSize: "12px",
                         color: "#333",
-                        marginBottom: "10px",
+                        margin: "0 0 4px 0",
+                        lineHeight: 1.1,
                       }}
                     >
                       {data.dept}
@@ -222,9 +202,10 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                   {data.phone && (
                     <div
                       style={{
-                        fontSize: "13px",
+                        fontSize: "12px",
                         color: "#333",
-                        marginBottom: "4px",
+                        margin: "0 0 2px 0",
+                        lineHeight: 1.1,
                       }}
                     >
                       📞 {data.phone}
@@ -233,9 +214,10 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
 
                   <div
                     style={{
-                      fontSize: "13px",
+                      fontSize: "12px",
                       color: "#333",
-                      marginBottom: "4px",
+                      margin: "0 0 2px 0",
+                      lineHeight: 1.1,
                     }}
                   >
                     📍 {data.address}
@@ -243,9 +225,10 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
 
                   <div
                     style={{
-                      fontSize: "13px",
+                      fontSize: "12px",
                       color: "#333",
-                      marginBottom: "4px",
+                      margin: "0 0 2px 0",
+                      lineHeight: 1.1,
                     }}
                   >
                     🏙️ {data.city}
@@ -253,15 +236,16 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
 
                   <div
                     style={{
-                      fontSize: "13px",
-                      marginBottom: "4px",
+                      fontSize: "12px",
+                      margin: "0 0 2px 0",
+                      lineHeight: 1.1,
                     }}
                   >
                     ✉️{" "}
                     <a
                       href={`mailto:${data.email}`}
                       style={{
-                        color: "#2c6f8f",
+                        color: SHIELD_BLUE,
                         textDecoration: "none",
                       }}
                     >
@@ -271,7 +255,8 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
 
                   <div
                     style={{
-                      fontSize: "13px",
+                      fontSize: "12px",
+                      lineHeight: 1.1,
                     }}
                   >
                     🌐{" "}
@@ -280,7 +265,7 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                       target="_blank"
                       rel="noreferrer"
                       style={{
-                        color: "#2c6f8f",
+                        color: SHIELD_BLUE,
                         textDecoration: "none",
                       }}
                     >
@@ -297,7 +282,8 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
       {/* Descargar PNG */}
       <button
         onClick={downloadSignaturePNG}
-        className="mt-5 text-black w-full rounded-lg bg-[#FBC710] px-4 py-3.5 text-[15px] font-bold transition hover:opacity-90 active:scale-[0.98] cursor-pointer"
+        disabled={!isValid}
+        className={`mt-3 text-black w-full rounded-lg bg-brand-yellow px-4 py-3.5 text-[15px] font-bold transition active:scale-[0.98] ${!isValid ? "opacity-50 pointer-events-none" : "cursor-pointer"}`}
       >
         ⬇ Descargar firma PNG
       </button>
@@ -305,7 +291,8 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
       {/* Copiar HTML */}
       <button
         onClick={copyHTMLSignature}
-        className="mt-2.5 w-full rounded-lg border-2 border-[#FBC710] bg-transparent px-4 py-3.5 text-[15px] font-bold text-black transition hover:bg-[#E5B400] hover:text-white active:scale-[0.98] cursor-pointer"
+        disabled={!isValid}
+        className={`mt-2 w-full rounded-lg border-2 border-brand-yellow bg-transparent px-4 py-3.5 text-[15px] font-bold text-black transition active:scale-[0.98] ${!isValid ? "opacity-50 pointer-events-none" : "cursor-pointer"}`}
       >
         📋 Copiar HTML para correo
       </button>

@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+/* Fallback brand utility classes (apply immediately without Tailwind rebuild) */
+.bg-brand-yellow{ background-color: #fdc910; }
+.border-brand-yellow{ border-color: #fdc910; }
+.text-shield-blue{ color: #009FE3; }
+.text-shield-green{ color: #009540; }
+.text-shield-red{ color: #E20613; }
+.bg-shield-yellow{ background-color: #FFED00; }
+.bg-shield-red{ background-color: #E20613; }
+.bg-shield-blue{ background-color: #009FE3; }
+.bg-shield-green{ background-color: #009540; }
+.bg-shield-black{ background-color: #000000; }
+.bg-brand-gray{ background-color: #cccccc; }
+
+.opacity-50 { opacity: 0.5; }
+.pointer-events-none { pointer-events: none; }

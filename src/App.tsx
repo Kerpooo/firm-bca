@@ -37,9 +37,7 @@ function App() {
                 Generador de Firmas Institucionales
               </h1>
 
-              <p className="mt-1 text-sm text-gray-600">
-                Alcaldía Distrital de Barrancabermeja
-              </p>
+              <p className="mt-1 text-sm text-gray-600">Alcaldía Distrital de Barrancabermeja</p>
             </div>
           </div>
         </div>

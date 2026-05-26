@@ -1,4 +1,5 @@
 import type { InformationFormProps } from "../interfaces/main";
+import { BRAND_YELLOW } from "../constants/brand";
 
 export const InformationForm = ({ data, onChange }: InformationFormProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,7 +15,7 @@ export const InformationForm = ({ data, onChange }: InformationFormProps) => {
     <form className="flex-[0_0_340px] space-y-4 rounded-xl bg-white px-6 py-7 shadow-[0_2px_12px_rgba(0,0,0,0.08)]">
       <div className="field flex flex-col gap-1">
         <label className="text-sm font-semibold text-gray-700">
-          Nombre completo
+          Nombre completo <span style={{ color: BRAND_YELLOW }}>*</span>
         </label>
 
         <input
@@ -22,25 +23,29 @@ export const InformationForm = ({ data, onChange }: InformationFormProps) => {
           name="name"
           value={data.name}
           onChange={handleChange}
-          className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-blue-500"
+          required
+          aria-required={true}
+          className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-brand-yellow"
         />
       </div>
 
       <div className="field flex flex-col gap-1">
-        <label className="text-sm font-semibold text-gray-700">Cargo</label>
+        <label className="text-sm font-semibold text-gray-700">Cargo <span style={{ color: BRAND_YELLOW }}>*</span></label>
 
         <input
           type="text"
           name="title"
           value={data.title}
           onChange={handleChange}
-          className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-blue-500"
+          required
+          aria-required={true}
+          className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-brand-yellow"
         />
       </div>
 
       <div className="field flex flex-col gap-1">
         <label className="text-sm font-semibold text-gray-700">
-          Dependencia
+          Dependencia <span style={{ color: BRAND_YELLOW }}>*</span>
         </label>
 
         <input
@@ -48,7 +53,9 @@ export const InformationForm = ({ data, onChange }: InformationFormProps) => {
           name="dept"
           value={data.dept}
           onChange={handleChange}
-          className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-blue-500"
+          required
+          aria-required={true}
+          className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-brand-yellow"
         />
       </div>
 
@@ -62,13 +69,13 @@ export const InformationForm = ({ data, onChange }: InformationFormProps) => {
           name="group"
           value={data.group}
           onChange={handleChange}
-          className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-blue-500"
+          className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-brand-yellow"
         />
       </div>
 
       <div className="field flex flex-col gap-1">
         <label className="text-sm font-semibold text-gray-700">
-          Correo electrónico
+          Correo electrónico <span style={{ color: BRAND_YELLOW }}>*</span>
         </label>
 
         <input
@@ -76,7 +83,9 @@ export const InformationForm = ({ data, onChange }: InformationFormProps) => {
           name="email"
           value={data.email}
           onChange={handleChange}
-          className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-blue-500"
+          required
+          aria-required={true}
+          className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-brand-yellow"
         />
       </div>
 
@@ -88,43 +97,49 @@ export const InformationForm = ({ data, onChange }: InformationFormProps) => {
           name="phone"
           value={data.phone}
           onChange={handleChange}
-          className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-blue-500"
+          className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-brand-yellow"
         />
       </div>
 
       <div className="field flex flex-col gap-1">
-        <label className="text-sm font-semibold text-gray-700">Dirección</label>
+        <label className="text-sm font-semibold text-gray-700">Dirección <span style={{ color: BRAND_YELLOW }}>*</span></label>
 
         <input
           type="text"
           name="address"
           value={data.address}
           onChange={handleChange}
-          className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-blue-500"
+          required
+          aria-required={true}
+          className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-brand-yellow"
         />
       </div>
 
       <div className="field flex flex-col gap-1">
-        <label className="text-sm font-semibold text-gray-700">Ciudad</label>
+        <label className="text-sm font-semibold text-gray-700">Ciudad <span style={{ color: BRAND_YELLOW }}>*</span></label>
 
         <input
           type="text"
           name="city"
           value={data.city}
           onChange={handleChange}
-          className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-blue-500"
+          required
+          aria-required={true}
+          className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-brand-yellow"
         />
       </div>
 
       <div className="field flex flex-col gap-1">
-        <label className="text-sm font-semibold text-gray-700">Sitio web</label>
+        <label className="text-sm font-semibold text-gray-700">Sitio web <span style={{ color: BRAND_YELLOW }}>*</span></label>
 
         <input
           type="text"
           name="web"
           value={data.web}
           onChange={handleChange}
-          className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-blue-500"
+          required
+          aria-required={true}
+          className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-brand-yellow"
         />
       </div>
     </form>
