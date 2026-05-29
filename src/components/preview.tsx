@@ -43,6 +43,7 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
         <div style="font-size:16px; font-weight:700; margin:0;">${data.name}</div>
         <div style="font-size:13px; font-weight:700; color:${SHIELD_BLACK}; margin:0 0 2px 0;">${data.title}</div>
         ${data.dept ? `<div style="font-size:12px; color:#333; margin:0 0 4px 0;">${data.dept}</div>` : ""}
+        ${data.group ? `<div style="font-size:12px; color:#333; margin:0 0 4px 0;">${data.group}</div>` : ""}
         ${data.phone ? `<div style="font-size:12px; color:#333; margin:0 0 2px 0;">📞 ${data.phone}</div>` : ""}
         <div style="font-size:12px; color:#333; margin:0 0 2px 0;">📍 ${data.address}</div>
         <div style="font-size:12px; color:#333; margin:0 0 2px 0;">🏙️ ${data.city}</div>
@@ -196,6 +197,19 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                       }}
                     >
                       {data.dept}
+                    </div>
+                  )}
+
+                  {data.group && (
+                    <div
+                      style={{
+                        fontSize: "13px",
+                        color: "#333",
+                        marginBottom: "6px",
+                        lineHeight: 1.2,
+                      }}
+                    >
+                      {data.group}
                     </div>
                   )}
 
