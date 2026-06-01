@@ -5,6 +5,7 @@ import html2canvas from "html2canvas";
 
 export default function SignaturePreview({ data }: SignaturePreviewProps) {
   const signatureRef = useRef<HTMLDivElement>(null);
+  const DEFAULT_LOGO_URL = "https://firm-bca.vercel.app/logo_firma.webp";
 
   const isValid = useMemo(() => {
     const required = [
@@ -37,7 +38,7 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
   <table cellpadding="0" cellspacing="0" border="0">
     <tr>
       <td style="padding-right:6px; vertical-align:middle; padding-top:0; padding-bottom:0;">
-        <img src="https://www.barrancabermeja.gov.co/info/barrancabermeja_bco/media/galeria/thumbs/thgaleria_700X400_1507.webp" width="160" style="display:block; border:0; object-fit:contain;" />
+        <img src={DEFAULT_LOGO_URL} width="160" style="display:block; border:0; object-fit:contain;" />
       </td>
       <td style="padding-left:6px; vertical-align:top; padding-top:0; padding-bottom:0;">
         <div style="font-size:16px; font-weight:700; margin:0;">${data.name}</div>
@@ -61,18 +62,15 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
       alert("Completa los campos obligatorios antes de copiar la firma.");
       return;
     }
-
     try {
       const html = generateSignatureHTML();
-
       await navigator.clipboard.write([
         new ClipboardItem({
           "text/html": new Blob([html], { type: "text/html" }),
           "text/plain": new Blob([html], { type: "text/plain" }),
         }),
       ]);
-
-      alert("Firma HTML copiada");
+      alert("Firma HTML copiada ✓");
     } catch (error) {
       console.error(error);
       alert("Error al copiar");
@@ -145,13 +143,14 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                   }}
                 >
                   <img
-                    src="/logo.png"
+                    src={DEFAULT_LOGO_URL}
                     alt="Logo"
                     width={220}
                     style={{
                       display: "block",
                       border: 0,
                       objectFit: "contain",
+                      background: "#ffffff",
                     }}
                   />
                 </td>
