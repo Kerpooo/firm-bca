@@ -2,11 +2,10 @@ import { useRef, useMemo } from "react";
 import { SHIELD_BLUE, SHIELD_BLACK } from "../constants/brand";
 import type { SignaturePreviewProps } from "../interfaces/main";
 import html2canvas from "html2canvas";
+import { LOGO_BASE64 } from "../constants/logoBase64";
 
 export default function SignaturePreview({ data }: SignaturePreviewProps) {
   const signatureRef = useRef<HTMLDivElement>(null);
-  const DEFAULT_LOGO_URL = "https://firm-bca.vercel.app/logo_firma.webp";
-
   const isValid = useMemo(() => {
     const required = [
       "name",
@@ -38,7 +37,7 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
   <table cellpadding="0" cellspacing="0" border="0">
     <tr>
       <td style="padding-right:6px; vertical-align:middle; padding-top:0; padding-bottom:0;">
-        <img src={DEFAULT_LOGO_URL} width="160" style="display:block; border:0; object-fit:contain;" />
+        <img src="${LOGO_BASE64}" width="160" style="display:block; border:0; object-fit:contain;" />
       </td>
       <td style="padding-left:6px; vertical-align:top; padding-top:0; padding-bottom:0;">
         <div style="font-size:16px; font-weight:700; margin:0;">${data.name}</div>
@@ -143,7 +142,7 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                   }}
                 >
                   <img
-                    src={DEFAULT_LOGO_URL}
+                    src={LOGO_BASE64}
                     alt="Logo"
                     width={220}
                     style={{
