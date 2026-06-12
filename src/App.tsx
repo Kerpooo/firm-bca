@@ -21,44 +21,50 @@ function App() {
   });
 
   return (
-    <main className="min-h-screen bg-[#f3f4f6]">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200">
       {/* Header */}
-      <section className="border-b border-gray-200 bg-white">
-        <div className="mx-auto max-w-7xl px-6 py-8">
-          <div className="flex items-center gap-4">
-            <img
-              src="/logo.png"
-              alt="Alcaldía de Barrancabermeja"
-              className="h-16 w-auto"
-            />
-
-            <div>
-              <h1 className="text-3xl font-black text-[#222]">
-                Generador de Firmas Institucionales
-              </h1>
-
-              <p className="mt-1 text-sm text-gray-600">Alcaldía Distrital de Barrancabermeja</p>
-            </div>
+      <header className="bg-white shadow-[0_2px_20px_rgba(0,0,0,0.06)]">
+        <div className="mx-auto flex max-w-7xl items-center gap-5 px-6 py-5 sm:px-8">
+          <img
+            src="/logo.png"
+            alt="Alcaldía de Barrancabermeja"
+            className="h-14 w-auto"
+          />
+          <div>
+            <h1 className="text-xl font-black tracking-tight text-shield-blue sm:text-2xl">
+              Generador de Firmas
+            </h1>
+            <p className="text-xs font-medium text-gray-500">
+              Alcaldía Distrital de Barrancabermeja
+            </p>
           </div>
         </div>
-      </section>
+        <div className="flex h-[3px]">
+          <div className="flex-1 bg-shield-green" />
+          <div className="flex-1 bg-shield-blue" />
+          <div className="flex-1 bg-shield-red" />
+          <div className="flex-1 bg-shield-yellow" />
+        </div>
+      </header>
 
       {/* Content */}
-      <section className="mx-auto max-w-7xl px-6 py-8">
-        <div className="mb-6 rounded-2xl border border-[#dbe4ea] bg-[#f8fafc] px-5 py-4">
-          <p className="text-sm leading-relaxed text-[#4b5563]">
+      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <div className="mb-8 flex items-start gap-4 rounded-xl border border-gray-200 bg-white px-5 py-4 shadow-sm">
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-yellow text-xs font-bold text-black">
+            i
+          </span>
+          <p className="text-sm leading-relaxed text-gray-600">
             Completa la información del funcionario para generar una firma
             institucional compatible con clientes de correo electrónico.
           </p>
         </div>
 
-        <div className="flex flex-col gap-6 xl:flex-row">
+        <div className="flex flex-col gap-8 xl:flex-row">
           <InformationForm data={formData} onChange={setFormData} />
-
           <SignaturePreview data={formData} />
         </div>
-      </section>
-    </main>
+      </main>
+    </div>
   );
 }
 
