@@ -1,5 +1,6 @@
 export interface SignatureData {
-  name: string;
+  firstName: string;
+  lastName: string;
   title: string;
   dept: string;
   group: string;
@@ -16,7 +17,5 @@ export interface SignaturePreviewProps {
 
 export interface InformationFormProps {
   data: SignatureData;
-  onChange: React.Dispatch<
-    React.SetStateAction<SignatureData>
-  >;
+  onChange: (data: SignatureData) => void;
 }

@@ -9,10 +9,11 @@ import type { SignatureData } from "./interfaces/main";
 
 function App() {
   const [formData, setFormData] = useState<SignatureData>({
-    name: "Dirección de Talento Humano",
+    firstName: "",
+    lastName: "",
     title: "",
     dept: "",
-    group: "Grupo de Gestión Administrativa",
+    group: "",
     email: "talento.humano@barrancabermeja.gov.co",
     phone: "",
     address: "Calle 49 No. 3-61 Sector Comercial",
@@ -21,7 +22,7 @@ function App() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200">
+    <div className="min-h-screen bg-linear-to-br from-gray-100 to-gray-200">
       {/* Header */}
       <header className="bg-white shadow-[0_2px_20px_rgba(0,0,0,0.06)]">
         <div className="mx-auto flex max-w-7xl items-center gap-5 px-6 py-5 sm:px-8">
@@ -39,7 +40,7 @@ function App() {
             </p>
           </div>
         </div>
-        <div className="flex h-[3px]">
+        <div className="flex h-0.75">
           <div className="flex-1 bg-shield-green" />
           <div className="flex-1 bg-shield-blue" />
           <div className="flex-1 bg-shield-red" />
