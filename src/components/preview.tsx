@@ -45,9 +45,9 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
         <img src="/figures.png" alt="" style="display:block;height:100%;width:100%;object-fit:cover;object-position:65% 55%;border:0;background:#ffffff;" />
       </td>
       <td style="padding:0 40px;vertical-align:middle;background:#ffffff;">
-        <div style="font-size:24px;font-weight:800;line-height:1;color:#1a1a1a;margin:0;">${data.firstName || "Nombres"}</div>
-        <div style="font-size:14px;font-weight:700;line-height:1;color:#7a7a7a;margin:1px 0 0;">${data.lastName || "Apellidos"}</div>
-        <div style="height:2px;width:100%;background:#fdc910;margin:6px 0 4px;"></div>
+        <div style="font-size:24px;font-weight:800;line-height:1;color:#1a1a1a;margin:0 0 4px;">${data.firstName || "Nombres"}</div>
+        <div style="font-size:14px;font-weight:700;line-height:1;color:#7a7a7a;margin:0;">${data.lastName || "Apellidos"}</div>
+        <div style="height:2px;width:144px;background:#fdc910;margin:12px 0 4px;"></div>
         <div style="font-size:14px;font-weight:700;line-height:1;color:#1a1a1a;margin:0 0 1px;">${data.title || "Cargo"}</div>
         <div style="font-size:9px;font-weight:600;line-height:1;color:#7a7a7a;margin:0 0 4px;">${data.dept || ""}</div>
         ${data.group ? `<div style="font-size:9px;font-weight:600;line-height:1;color:#7a7a7a;margin:0 0 4px;">${data.group}</div>` : ""}
@@ -81,7 +81,7 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
         </table>
       </td>
       <td style="width:2px;padding:0;background:#ffffff;">
-        <div style="width:2px;height:80px;background:#1a1a1a;"></div>
+        <div style="width:2px;height:120px;background:#1a1a1a;"></div>
       </td>
       <td style="width:180px;padding:0 10px;text-align:center;vertical-align:middle;background:#ffffff;">
         <img src="/logo.png" alt="" style="display:block;margin:0 auto 5px;height:140px;width:auto;border:0;background:#ffffff;" />
@@ -226,13 +226,13 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
 
             {/* Datos */}
             <div className="flex flex-col justify-center px-9">
-              <div className="text-[24px] font-extrabold leading-none tracking-tight text-[#1a1a1a]">
+              <div className="mb-1 text-[24px] font-extrabold leading-none tracking-tight text-[#1a1a1a]">
                 {data.firstName || "Nombres"}
               </div>
               <div className="text-[14px] font-bold leading-none tracking-tight text-[#7a7a7a]">
                 {data.lastName || "Apellidos"}
               </div>
-              <div className="mt-1.5 mb-0.5 h-0.5 w-full rounded-full bg-[#fdc910]" />
+              <div className="mt-3 mb-0.5 h-0.5 w-36 rounded-full bg-[#fdc910]" />
               <div className="text-[14px] font-bold leading-none text-[#1a1a1a]">
                 {data.title || "Cargo"}
               </div>
@@ -287,7 +287,7 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
             </div>
 
             {/* Separador */}
-            <div className="shrink-0 self-center bg-[#1a1a1a]" style={{ width: '2px', height: '80px' }} />
+            <div className="shrink-0 self-center bg-[#1a1a1a]" style={{ width: '2px', height: '120px' }} />
 
             {/* Escudo */}
             <div className="flex w-45 shrink-0 flex-col items-center justify-center px-2.5 text-center">
