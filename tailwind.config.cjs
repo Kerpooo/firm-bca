@@ -15,6 +15,17 @@ module.exports = {
         'brand-yellow': '#fdc910',
         'brand-gray': '#cccccc',
       },
+      spacing: {
+        '70': '17.5rem',
+        '90': '22.5rem',
+      },
+      width: {
+        '70': '17.5rem',
+        '90': '22.5rem',
+      },
+      height: {
+        '70': '17.5rem',
+      },
     },
   },
   plugins: [],

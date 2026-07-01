@@ -7,8 +7,77 @@ import type { SignaturePreviewProps } from "../interfaces/main";
 const FIGURES_ART_SRC = "/figures.png";
 const SHIELD_LOGO_SRC = "/logo.png";
 
-const ICON_WRAPPER_CLASS =
-  "flex h-[18px] w-[18px] shrink-0 items-center justify-center overflow-hidden rounded-full text-[9px]";
+const IconMail = () => (
+  <svg
+    width="22"
+    height="22"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#1a1a1a"
+    strokeWidth={1.8}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="block shrink-0"
+  >
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+    <polyline points="22,6 12,13 2,6" />
+  </svg>
+);
+
+const IconPhone = () => (
+  <svg
+    width="22"
+    height="22"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#55565b"
+    strokeWidth={1.8}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="block shrink-0"
+  >
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
+  </svg>
+);
+
+const IconPin = () => (
+  <svg
+    width="22"
+    height="22"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#ec1c5e"
+    strokeWidth={1.8}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="block shrink-0"
+  >
+    <path
+      d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+      fill="#ec1c5e"
+      fillOpacity={0.12}
+    />
+    <circle cx="12" cy="10" r="3" />
+  </svg>
+);
+
+const IconGlobe = () => (
+  <svg
+    width="22"
+    height="22"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="#29a8e0"
+    strokeWidth={1.8}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="block shrink-0"
+  >
+    <circle cx="12" cy="12" r="10" />
+    <line x1="2" y1="12" x2="22" y2="12" />
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+  </svg>
+);
 
 export default function SignaturePreview({ data }: SignaturePreviewProps) {
   const signatureRef = useRef<HTMLDivElement>(null);
@@ -36,56 +105,61 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
   const generateSignatureHTML = () => {
     const cityLine = [data.address, data.city].filter(Boolean).join(", ");
 
+    const ICON_MAIL =
+      '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a1a1a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="display:block;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>';
+    const ICON_PHONE =
+      '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#55565b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="display:block;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
+    const ICON_PIN =
+      '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec1c5e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="display:block;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" fill="#ec1c5e" fill-opacity="0.12"/><circle cx="12" cy="10" r="3"/></svg>';
+    const ICON_GLOBE =
+      '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#29a8e0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="display:block;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>';
+
     return `
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 <div style="font-family:'Montserrat',Arial,sans-serif;color:#222;line-height:1.1;background:#ffffff;">
-  <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;width:840px;max-width:840px;background:#ffffff;">
+  <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;background:#ffffff;">
     <tr>
-      <td style="width:140px;padding:0;vertical-align:middle;text-align:center;background:#ffffff;overflow:hidden;">
+      <td style="width:280px;padding:0;vertical-align:middle;text-align:center;background:#ffffff;overflow:hidden;">
         <img src="/figures.png" alt="" style="display:block;height:100%;width:100%;object-fit:cover;object-position:65% 55%;border:0;background:#ffffff;" />
       </td>
-      <td style="padding:0 40px;vertical-align:middle;background:#ffffff;">
-        <div style="font-size:24px;font-weight:800;line-height:1;color:#1a1a1a;margin:0 0 4px;">${data.firstName || "Nombres"}</div>
-        <div style="font-size:14px;font-weight:700;line-height:1;color:#7a7a7a;margin:0;">${data.lastName || "Apellidos"}</div>
-        <div style="height:2px;width:144px;background:#fdc910;margin:12px 0 4px;"></div>
-        <div style="font-size:14px;font-weight:700;line-height:1;color:#1a1a1a;margin:0 0 1px;">${data.title || "Cargo"}</div>
-        <div style="font-size:9px;font-weight:600;line-height:1;color:#7a7a7a;margin:0 0 4px;">${data.dept || ""}</div>
-        ${data.group ? `<div style="font-size:9px;font-weight:600;line-height:1;color:#7a7a7a;margin:0 0 4px;">${data.group}</div>` : ""}
+      <td style="padding:0 60px 0 80px;vertical-align:middle;background:#ffffff;white-space:nowrap;">
+        <div style="font-size:48px;font-weight:800;line-height:1;color:#1a1a1a;margin:0 0 8px;">${data.firstName || "Nombres"}</div>
+        <div style="font-size:28px;font-weight:700;line-height:1;color:#7a7a7a;margin:0;">${data.lastName || "Apellidos"}</div>
+        <div style="height:3px;width:288px;background:#fdc910;margin:24px 0 12px;"></div>
+        <div style="font-size:28px;font-weight:700;line-height:1;color:#1a1a1a;margin:0 0 2px;">${data.title || "Cargo"}</div>
+        <div style="font-size:18px;font-weight:600;line-height:1;color:#7a7a7a;margin:0 0 8px;">${data.dept || ""}</div>
+        ${data.group ? `<div style="font-size:18px;font-weight:600;line-height:1;color:#7a7a7a;margin:0 0 8px;">${data.group}</div>` : ""}
         <table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
           <tr>
-            <td style="padding:0 0 3px;vertical-align:middle;">
-              <span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:999px;background:#fdc910;color:#111;font-size:10px;line-height:1;">&#9993;</span>
-            </td>
-            <td style="padding:0 0 3px 10px;vertical-align:middle;font-size:13px;color:#232323;">
+            <td style="width:22px;height:22px;padding:0 0 8px;vertical-align:middle;">${ICON_MAIL}</td>
+            <td style="padding:0 0 8px 10px;vertical-align:middle;font-size:26px;color:#232323;">
               <a href="mailto:${data.email}" style="color:#232323;text-decoration:none;">${data.email}</a>
             </td>
           </tr>
-          ${data.phone ? `<tr>
-            <td style="padding:0 0 3px;vertical-align:middle;">
-              <span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:999px;background:#ececeb;color:#444;font-size:10px;line-height:1;">&#128222;</span>
-            </td>
-            <td style="padding:0 0 3px 10px;vertical-align:middle;font-size:10px;color:#55565b;">${data.phone}</td>
-          </tr>` : ""}
+          ${
+            data.phone
+              ? `<tr>
+            <td style="width:22px;height:22px;padding:0 0 8px;vertical-align:middle;">${ICON_PHONE}</td>
+            <td style="padding:0 0 8px 10px;vertical-align:middle;font-size:20px;color:#55565b;">${data.phone}</td>
+          </tr>`
+              : ""
+          }
           <tr>
-            <td style="padding:0 0 3px;vertical-align:middle;">
-              <span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:999px;background:#ececeb;color:#444;font-size:10px;line-height:1;">&#128205;</span>
-            </td>
-            <td style="padding:0 0 3px 10px;vertical-align:middle;font-size:10px;color:#55565b;">${cityLine}</td>
+            <td style="width:22px;height:22px;padding:0 0 8px;vertical-align:middle;">${ICON_PIN}</td>
+            <td style="padding:0 0 8px 10px;vertical-align:middle;font-size:20px;color:#55565b;">${cityLine}</td>
           </tr>
           <tr>
-            <td style="padding:0;vertical-align:middle;">
-              <span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:999px;background:#ececeb;color:#444;font-size:10px;line-height:1;">&#127760;</span>
-            </td>
-            <td style="padding:0 0 0 10px;vertical-align:middle;font-size:10px;color:#55565b;">${data.web}</td>
+            <td style="width:22px;height:22px;padding:0;vertical-align:middle;">${ICON_GLOBE}</td>
+            <td style="padding:0 0 0 10px;vertical-align:middle;font-size:20px;color:#55565b;">${data.web}</td>
           </tr>
         </table>
       </td>
-      <td style="width:2px;padding:0;background:#ffffff;">
-        <div style="width:2px;height:120px;background:#1a1a1a;"></div>
+      <td style="width:2px;padding:0 36px;background:#ffffff;">
+        <div style="width:2px;height:260px;background:#1a1a1a;"></div>
       </td>
-      <td style="width:180px;padding:0 10px;text-align:center;vertical-align:middle;background:#ffffff;">
-        <img src="/logo.png" alt="" style="display:block;margin:0 auto 5px;height:140px;width:auto;border:0;background:#ffffff;" />
-        <div style="font-size:9px;color:#1a1a1a;line-height:1.3;text-align:center;white-space:nowrap;">
+      <td style="padding:0 20px 0 0;text-align:center;vertical-align:middle;background:#ffffff;white-space:nowrap;">
+        <img src="/logo.png" alt="" style="display:block;margin:0 auto 40px;height:280px;width:auto;border:0;background:#ffffff;" />
+        <div style="font-size:18px;color:#1a1a1a;line-height:1.3;text-align:center;white-space:nowrap;">
           Alcaldía Distrital de<br/>
           <strong style="font-weight:800;">Barrancabermeja</strong>
         </div>
@@ -134,17 +208,6 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
 
       const el = wrapper.children[1] as HTMLElement;
 
-      const iconSpans = el.querySelectorAll("span[style*='border-radius:999px']");
-      iconSpans.forEach((span) => {
-        const s = span as HTMLElement;
-        s.style.background = "none";
-        s.style.width = "auto";
-        s.style.height = "auto";
-        s.style.borderRadius = "0";
-        s.style.marginRight = "6px";
-        s.style.display = "inline";
-      });
-
       const imgs = Array.from(el.querySelectorAll("img"));
       await Promise.all(
         imgs.map(
@@ -174,8 +237,14 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
       const ctx = cropped.getContext("2d")!;
       ctx.drawImage(
         canvas,
-        0, 0, canvas.width, canvas.height - cropBottom,
-        0, 0, cropped.width, cropped.height,
+        0,
+        0,
+        canvas.width,
+        canvas.height - cropBottom,
+        0,
+        0,
+        cropped.width,
+        cropped.height,
       );
 
       const link = document.createElement("a");
@@ -213,10 +282,10 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
         <div className="overflow-x-auto p-4">
           <div
             ref={signatureRef}
-            className="inline-flex items-stretch rounded-2xl border border-gray-200 bg-white pl-0 pr-5 py-0"
+            className="inline-flex items-stretch rounded-2xl border border-gray-200 bg-white pl-0 pr-0 py-0"
           >
             {/* Figura decorativa (silueta completa, sin recorte) */}
-            <div className="flex w-35 shrink-0 items-center justify-center overflow-hidden">
+            <div className="flex w-70 shrink-0 items-center justify-center overflow-hidden">
               <img
                 src={FIGURES_ART_SRC}
                 alt=""
@@ -225,78 +294,68 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
             </div>
 
             {/* Datos */}
-            <div className="flex flex-col justify-center px-9">
-              <div className="mb-1 text-[24px] font-extrabold leading-none tracking-tight text-[#1a1a1a]">
+            <div className="flex flex-col justify-center px-16">
+              <div className="mb-2 text-[48px] font-extrabold leading-none tracking-tight text-[#1a1a1a]">
                 {data.firstName || "Nombres"}
               </div>
-              <div className="text-[14px] font-bold leading-none tracking-tight text-[#7a7a7a]">
+              <div className="text-[28px] font-bold leading-none tracking-tight text-[#7a7a7a]">
                 {data.lastName || "Apellidos"}
               </div>
-              <div className="mt-3 mb-0.5 h-0.5 w-36 rounded-full bg-[#fdc910]" />
-              <div className="text-[14px] font-bold leading-none text-[#1a1a1a]">
+              <div className="mt-6 mb-3 h-0.75 w-72 rounded-full bg-[#fdc910]" />
+              <div className="text-[28px] font-bold leading-none text-[#1a1a1a]">
                 {data.title || "Cargo"}
               </div>
-              <div className="mb-1 text-[9px] font-semibold leading-none text-[#7a7a7a]">
+              <div className="mb-2 text-[18px] font-semibold leading-none text-[#7a7a7a]">
                 {data.dept}
               </div>
               {data.group && (
-                <div className="mb-1 text-[9px] font-semibold leading-none text-[#7a7a7a]">
+                <div className="mb-2 text-[18px] font-semibold leading-none text-[#7a7a7a]">
                   {data.group}
                 </div>
               )}
 
-              <div className="flex items-center gap-2.5 pb-0.5 text-[13px] text-[#232323]">
-                <span
-                  className={`${ICON_WRAPPER_CLASS} bg-[#fdc910] text-[#111]`}
-                >
-                  &#9993;
-                </span>
-                <a
-                  href={`mailto:${data.email}`}
-                  className="text-[#232323] no-underline"
-                >
-                  {data.email}
-                </a>
-              </div>
-              {data.phone && (
-                <div className="flex items-center gap-2.5 pb-0.5 text-[10px] text-[#55565b]">
-                  <span
-                    className={`${ICON_WRAPPER_CLASS} bg-[#ececeb] text-[#444]`}
+              <div
+                className="grid items-center gap-x-2.5 gap-y-2"
+                style={{ gridTemplateColumns: "22px 1fr" }}
+              >
+                <IconMail />
+                <div className="leading-none text-[26px] text-[#232323]">
+                  <a
+                    href={`mailto:${data.email}`}
+                    className="text-[#232323] no-underline"
                   >
-                    &#128222;
-                  </span>
-                  <span>{data.phone}</span>
+                    {data.email}
+                  </a>
                 </div>
-              )}
-              <div className="flex items-center gap-2.5 pb-0.5 text-[10px] text-[#55565b]">
-                <span
-                  className={`${ICON_WRAPPER_CLASS} bg-[#ececeb] text-[#444]`}
-                >
-                  &#128205;
-                </span>
-                <span>{cityLine}</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-[10px] text-[#55565b]">
-                <span
-                  className={`${ICON_WRAPPER_CLASS} bg-[#ececeb] text-[#444]`}
-                >
-                  &#127760;
-                </span>
-                <span>{data.web}</span>
+                {data.phone && (
+                  <>
+                    <IconPhone />
+                    <div className="leading-none text-[20px] text-[#55565b]">
+                      {data.phone}
+                    </div>
+                  </>
+                )}
+                <IconPin />
+                <div className="leading-none text-[20px] text-[#55565b]">
+                  {cityLine}
+                </div>
+                <IconGlobe />
+                <div className="leading-none text-[20px] text-[#55565b]">
+                  {data.web}
+                </div>
               </div>
             </div>
 
             {/* Separador */}
-            <div className="shrink-0 self-center bg-[#1a1a1a]" style={{ width: '2px', height: '120px' }} />
+            <div
+              className="shrink-0 self-center bg-[#1a1a1a] mx-9"
+              style={{ width: "2px", height: "260px" }}
+            />
 
             {/* Escudo */}
-            <div className="flex w-45 shrink-0 flex-col items-center justify-center px-2.5 text-center">
-              <img
-                src={SHIELD_LOGO_SRC}
-                alt=""
-                className="mb-1 h-35 w-auto"
-              />
-              <div className="whitespace-nowrap text-[9px] leading-snug text-[#1a1a1a]">
+            <div className="flex shrink-0 flex-col items-center justify-center pr-5 text-center">
+              <img src={SHIELD_LOGO_SRC} alt="" className="mb-12 h-70 w-auto" />
+              <div className="whitespace-nowrap text-[18px] leading-snug text-[#1a1a1a]">
                 Alcaldía Distrital de
                 <br />
                 <strong className="font-extrabold">Barrancabermeja</strong>
