@@ -82,10 +82,10 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
         </table>
       </td>
       <td style="width:2px;padding:0;background:#ffffff;">
-        <div style="width:2px;height:120px;background:#1a1a1a;"></div>
+        <div style="width:1px;height:180px;background:#1a1a1a;"></div>
       </td>
       <td style="width:180px;padding:0 10px;text-align:center;vertical-align:middle;background:#ffffff;">
-        <img src="/logo.png" alt="" style="display:block;margin:0 auto 5px;height:140px;width:auto;border:0;background:#ffffff;" />
+        <img src="/logo.png" alt="" style="display:block;margin:0 auto 5px;height:80px;width:auto;border:0;background:#ffffff;" />
         <div style="font-size:9px;color:#1a1a1a;line-height:1.3;text-align:center;white-space:nowrap;">
           Alcaldía Distrital de<br/>
           <strong style="font-weight:800;">Barrancabermeja</strong>
@@ -298,7 +298,7 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
               {/* Separador */}
               <div
                 className="shrink-0 self-center bg-[#1a1a1a]"
-                style={{ width: "2px", height: "120px" }}
+                style={{ width: "1px", height: "180px" }}
               />
 
               {/* Escudo */}
@@ -306,7 +306,7 @@ export default function SignaturePreview({ data }: SignaturePreviewProps) {
                 <img
                   src={SHIELD_LOGO_SRC}
                   alt=""
-                  className="mb-1 h-35 w-auto"
+                  className="mb-1 h-20 w-auto"
                 />
                 <div className="whitespace-nowrap text-[9px] leading-snug text-[#1a1a1a]">
                   Alcaldía Distrital de
